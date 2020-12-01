@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 var _ = require('lodash');
 
-mongoose.connect("mongodb://localhost:27017/todolistdb", { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect("mongodb+srv://admin:Akarsh123@cluster0.h9fjl.mongodb.net/todolistdb?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true })
 
 const itemschema = {
 
@@ -125,7 +125,13 @@ app.get("/:day1", function(req, res) {
     });
 })
 
-app.listen(10, function() {
+let port = process.env.PORT;
+if (port === null || port === "") {
+    port(10);
+}
+app.listen(port);
+
+app.listen(port, function() {
 
     console.log("server started");
 });
